@@ -1,0 +1,257 @@
+.about{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+/* pochemu-nas ############################################################# */
+.pochemu-nas{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+.pochemu-nas-title{
+    font-family: 'Montserrat';
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    color: "000";
+}
+.pochemu-nas-item{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 50px;
+}
+.pochemu-nas-item-body{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.pochemu-nas-item-body-icon{
+    width: 57px;
+    height: 57px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #EEF1F3;
+
+}
+.pochemu-nas-item-body-icon-img{
+    background-color: #EEF1F3;
+}
+.pochemu-nas-item-body-text{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.pochemu-nas-item-body-text-title{
+    font-family: 'Montserrat';
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #4971FF;
+}
+.pochemu-nas-item-body-text-subTitle{
+    font-family: "Montserrat";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #000;
+}
+.pochemu-nas-map{
+    max-width: 100%;
+    background: linear-gradient(270deg, #2F489E 0%, #203067 100%);
+    padding: 42px 0px 42px 30px;
+    border-radius: 5px;
+    position: relative;
+}
+.pochemu-nas-map-text{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.pochemu-nas-map-text-title{
+    font-family: 'Montserrat';
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    color: #fff;
+}
+.pochemu-nas-map-text-subTitle{
+    font-family: 'Montserrat';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #fff;
+}
+.map{
+    position: absolute;
+    top: 0;
+    right: 50px;
+}
+/* otzivi ############################################################# */
+.otziv{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 50px;
+}
+.otziv-card{
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+.otziv-card-item{
+    flex: 1 1 43%;
+    border-radius: 5px;
+    display: flex;
+    gap: 20px;
+    background-color: #EEF1F3;
+    padding: 30px;
+}
+.otziv-card-item-icon{
+    min-width: 57px;
+    height: 57px;
+    border-radius: 50%;
+    background-color: #4971FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.otziv-card-item-text{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.otziv-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.otziv-btn-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 28px;
+    background-color: #4971FF;
+    color: #fff;
+    border-radius: 5px 0px 0px 5px;
+}
+.otziv-btn-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 22px;
+    background-color: #698AFF;
+    color: #fff;
+    border-radius: 5px;
+    position: relative;
+    left: -5px;
+    font-size: 24px;
+}
+.inf{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 0px 15px #c1c1c1;
+    margin-bottom: 60px;
+    padding: 58px 14px 0px 100px;
+}
+.inf-text{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.inf-text-item{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.inf-text-item-title{
+    font-family: "Montserrat";
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 38px;
+    color: #303030;
+}
+.inf-text-item-subtitle{
+font-family: "Montserrat";
+font-size: 16px;
+font-weight: 400;
+line-height: 24px;
+color: #303030;
+
+}
+.inf-text-item-subtitle span{
+    font-family: "Montserrat";
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #103A4F;
+}
+.inf-text-input{
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+}
+.inf-text-input-item{
+    width: 203px;
+    border: none;
+    border-bottom: 1px solid rgba(48, 48, 48, 1);
+    padding: 5px 0px;
+}
+.inf-text-input-item:focus{
+    outline: none;
+}
+.inf-text-input-item:nth-child(3){
+    width: 207px;
+}
+.inf-text-btn{
+    border: none;
+    width: 166px;
+    height: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(73, 113, 255, 1);
+    cursor: pointer;
+    color: #fff;
+    border-radius: 5px;
+}
+.inf-text-btn:hover{
+    opacity: 90%;
+}
+
+/* tg-bot ################################################################ */
+.styled-message {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.text {
+    list-style: none;
+    padding: 0;
+}
+
+.text li {
+    margin-bottom: 5px;
+}

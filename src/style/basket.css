@@ -1,0 +1,46 @@
+.basket{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+.basket-title{
+    font-family: 'Montserrat';
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    color: var(--colorBlack);
+    margin-top: 50px;
+}
+
+/* Apply some basic styling to the table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: 1px solid var(--catalogItemColor);
+}
+
+.table th {
+    background-color: var(--liniyaColor);
+    padding: 8px;
+    text-align: left;
+}
+
+/* Style the table rows */
+.table td, .table th {
+    padding: 8px;
+}
+
+.table td {
+    color: var(--btnColor);
+}
+.table td:nth-child(3){
+    color: var(--colorBlack);
+}
+
+.Delete-Items{
+    color: var(--deleteColor);
+    cursor: pointer;
+}
