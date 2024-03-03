@@ -13,7 +13,6 @@ import Catalog from "../photo/png/layout/catalog-fon.png";
 import CatalogBack from "../photo/png/layout/catalog-back.png";
 import WhitePlus from "../photo/png/layout/white-plus.png";
 import CatalogImg from "../photo/png/layout/catalog-img.png";
-import ArmaturaImg from "../photo/png/layout/armatura-img.png";
 import Footer from "../photo/img/footer.png"
 import CarbonBlue from "../photo/png/About/map/carbon-blue.png";
 import { Users } from "../DataBase/User";
@@ -26,6 +25,13 @@ class Layout extends React.Component{
             count: 1,
             catalog:true,
             CatalogImg: CatalogImg,
+            blog:false,
+            summa:0,
+            ModalId:'',
+            ModalName:'',
+            ModalPrice:'',
+            ModalImg:null,
+            modal:false,
           };
         this.Arrays = [
             WhitePlus, 
@@ -34,28 +40,99 @@ class Layout extends React.Component{
           ];
       }
 
-    componentDidMount() {
+      componentDidMount() {
+        if(window.location.pathname === '/'){
+            this.setState({blog:true});
+        } else {
+            this.setState({blog:false});
+        }
         window.addEventListener('click', this.handleGlobalClick);
+        if(Items !== null){
+            let totalSum = 0;
+
+            Items.forEach((item) => {
+                if(item.active){
+                    totalSum += item.Price * item.Quantity;
+                }
+            });
+
+            this.setState({summa:totalSum});
+        }
+        this.BaseFunction();
     }
-    
-    componentWillUnmount() {
-        window.removeEventListener('click', this.handleGlobalClick);
+
+    BaseFunction = () => {
+        const   CatalogItemCard = document.querySelector('.catalog-item-card');
+
+    if(Users.length >= 1){
+        Users.forEach((e , index) => {
+            const CatalogItemCardBody = document.createElement('div');
+            const CatalogItemCardTitle = document.createElement('div');
+            const CatalogItemCardText = document.createElement('div');
+            const CatalogItemCardBtn = document.createElement('div');
+            const CatalogItemCardImg= document.createElement('div');
+            const CatalogItemCardImgIcon= document.createElement('img');
+
+            CatalogItemCardBody.className = 'catalog-item-card-body';
+            CatalogItemCardTitle.className = 'catalog-item-card-body-title';
+            CatalogItemCardText.className = 'catalog-item-card-body-text';
+            CatalogItemCardBtn.className = 'catalog-item-card-body-btn';
+            CatalogItemCardImg.className = 'catalog-item-card-body-img';
+            CatalogItemCardImgIcon.className = 'localstorage-img';
+
+            CatalogItemCardTitle.innerHTML = e.Name;
+            CatalogItemCardText.innerHTML = `от  ${e.Price} руб/м`;
+            CatalogItemCardBtn.innerHTML = '+';
+            CatalogItemCardImgIcon.src = e.Img;
+            CatalogItemCardImg.appendChild(CatalogItemCardImgIcon);
+
+
+            CatalogItemCardBtn.addEventListener('click' , () => {
+                const existingUsers = localStorage.getItem('myUsers');
+                const newUser = Users[index];
+                
+                if (existingUsers) {
+                    const usersArray = JSON.parse(existingUsers);
+                    const isUserExist = usersArray.some(user => user.id === newUser.id);
+                    if (!isUserExist) {
+                        usersArray.push(newUser);
+                        localStorage.setItem('myUsers', JSON.stringify(usersArray));
+                    }
+                } else {
+                    localStorage.setItem('myUsers', JSON.stringify([newUser]));
+                }
+                window.location.reload();
+            })
+
+            CatalogItemCardBody.appendChild(CatalogItemCardTitle);
+            CatalogItemCardBody.appendChild(CatalogItemCardText);
+            CatalogItemCardBody.appendChild(CatalogItemCardBtn);
+            CatalogItemCardBody.appendChild(CatalogItemCardImg);
+            CatalogItemCard.appendChild(CatalogItemCardBody);
+        })
+    }
+
     }
     
     handleGlobalClick = () => {
-        if(window.location.pathname === "/"){
-            document.getElementById('catalog').style.display = "block";
-        }else{
-            document.getElementById('catalog').style.display = "none";
+
+        if(window.location.pathname === '/'){
+            this.setState({blog:true});
+        } else {
+            this.setState({blog:false});
         }
-    };
+
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('click', this.handleGlobalClick);
+    }
 
     handleHamburgerClick = () => {
         const fixedHamburger = document.querySelector('.layout-nav-fixed-hamburger');
         const computedStyle = window.getComputedStyle(fixedHamburger);
     
-        fixedHamburger.style.display = computedStyle.display === 'none' ? 'flex' : 'none';
-    
+        fixedHamburger.style.display = computedStyle.display === 'none' ? 'flex' : 'none';    
     };
     
     blockCardBodyClick = (Users) => {
@@ -137,8 +214,59 @@ class Layout extends React.Component{
         }
     };
 
+    ModalForm = (e) => {
+        e.preventDefault();
+        const { ModalId, ModalName, ModalPrice, ModalImg } = this.state;
+    
+        let myUsers = JSON.parse(localStorage.getItem('myUsers')) || []; 
+    
+        // Rasmni base64 formatida o'qish
+        const reader = new FileReader();
+        reader.readAsDataURL(ModalImg);
+    
+        reader.onload = () => {
+            const base64Img = reader.result;
+    
+            // Rasm ma'lumotlari
+            const newUser = {
+                id: ModalId,
+                Name: ModalName,
+                Price: ModalPrice,
+                Img: base64Img, // Rasm manzilini base64 formatida yuklash
+                active: true,
+                Quantity: 1,
+            };
+    
+            myUsers.push(newUser);
+    
+            localStorage.setItem('myUsers', JSON.stringify(myUsers));
+        };
+
+        this.closeModal();
+        window.location.reload();
+    }
+
+    handleChangeModal = (e) => {
+        if (e.target.type === 'file') {
+            this.setState({
+                [e.target.name]: e.target.files[0] // Rasmni yuklash
+            });
+        } else {
+            this.setState({
+                [e.target.name]: e.target.value // Qiymatni yangilash
+            });
+        }
+    }
+
+    closeModal = () =>{
+        this.setState({modal: false})
+    }
+
+    OpenModal = () => {
+        this.setState({modal: true})
+    }
+    
     render(){
-        const Summa = 0;
         return(
             <div className="layout-main">
 
@@ -159,7 +287,7 @@ class Layout extends React.Component{
                                     <Link to="/delivery" className="color">Достава</Link>
                                 </li>
                                 <li>
-                                    <Link to="/payment" className="color">Оплата</Link>
+                                    <Link to="/checkout" className="color">Оплата</Link>
                                 </li>
                                 <li>
                                     <Link to="/reviews" className="color">Отзывы</Link>
@@ -247,12 +375,12 @@ class Layout extends React.Component{
 
                             <li className="layout-nav-bottom-basket">
 
-                                <Link to="/basket" className="color"><img src={Basket} alt="" /></Link>
+                                <Link to="/delivery" className="color"><img src={Basket} alt="" /></Link>
 
                                 <div className="layout-nav-bottom-basket-number">
                                     <div className="layout-nav-bottom-basket-number-title">Ваша корзина</div>
                                     <div className="layout-nav-bottom-basket-number-text">
-                                        {Items.reduce((accumulator, currentItem) => accumulator + (currentItem.Price * currentItem.Quantity),0)} $
+                                         {this.state.summa} {' $'}
                                     </div>
                                 </div>
 
@@ -261,7 +389,7 @@ class Layout extends React.Component{
                         </ul>
                     </nav>
 
-                    <div className="catalog" id="catalog">
+                    <div className="catalog" id="catalog" style={{display:this.state.blog === true ? 'flex' : 'none'}}>
 
                         <div className="catalog-slide">
 
@@ -330,63 +458,51 @@ class Layout extends React.Component{
 
                         <div className="catalog-item">
 
-                            <div className="catalog-item-card">
+                            <div className="catalog-item-card_button-body">
 
-                                <div className="catalog-item-card-body">
-                                    <div className="catalog-item-card-body-title">Арматура</div>
-                                    <div className="catalog-item-card-body-text">от 14руб/м</div>
-                                    <div className="catalog-item-card-body-btn">{"+"}</div>
-                                    <div className="catalog-item-card-body-img">
-                                        <img src={ArmaturaImg} alt="" style={{width:"170px"}}/>
-                                    </div>
+                                <div className="catalog-item-card">
+                                    {/* Items Base dan keladigan malumotlar chiqadi funcsiya yordamida */}
                                 </div>
 
-                                <div className="catalog-item-card-body">
-                                    <div className="catalog-item-card-body-title">Арматура</div>
-                                    <div className="catalog-item-card-body-text">от 14руб/м</div>
-                                    <div className="catalog-item-card-body-btn">{"+"}</div>
-                                    <div className="catalog-item-card-body-img">
-                                        <img src={ArmaturaImg} alt="" style={{width:"170px"}}/>
-                                    </div>
+                                <button className="catalog-item-card-button" onClick={this.OpenModal}>Add product</button>
+
+                                <div className="Catalog-modal" style={{display:this.state.modal ? "flex" : "none"}}>
+
+                                    <form onSubmit={this.ModalForm} className="formModal">
+
+                                        <div className="formModal-item">
+                                            <label htmlFor="ModalId">Product id:</label>
+                                            <input type="number" placeholder="Id" name="ModalId" value={this.state.ModalId} onChange={this.handleChangeModal} required/>
+                                        </div>
+
+                                        <div className="formModal-item">
+                                            <label htmlFor="ModalName">Product name:</label>
+                                            <input type="text" placeholder="Name" name="ModalName" value={this.state.ModalName} onChange={this.handleChangeModal} required/>
+                                        </div>
+
+                                        <div className="formModal-item">
+                                            <label htmlFor="ModalPrice">Product price:</label>
+                                            <input type="number" placeholder="Price" name="ModalPrice" value={this.state.ModalPrice} onChange={this.handleChangeModal} required/>
+                                        </div>
+
+                                        <div className="formModal-item">
+                                            <label htmlFor="ModalImg">Product img:</label>
+                                            <input type="file" accept="image/*" name="ModalImg" onChange={this.handleChangeModal} required/>
+                                        </div>
+                                        
+                                        <div className="formModal-btn-body">
+                                            <button type="submit" className="formModal-btn">Jo'natish</button>
+                                        </div>
+
+                                        <div className="close-modal" onClick={this.closeModal}>x</div>
+
+
+                                    </form>
+
                                 </div>
 
-                                <div className="catalog-item-card-body">
-                                    <div className="catalog-item-card-body-title">Арматура</div>
-                                    <div className="catalog-item-card-body-text">от 14руб/м</div>
-                                    <div className="catalog-item-card-body-btn">{"+"}</div>
-                                    <div className="catalog-item-card-body-img">
-                                        <img src={ArmaturaImg} alt="" style={{width:"170px"}}/>
-                                    </div>
-                                </div>
-
-                                <div className="catalog-item-card-body">
-                                    <div className="catalog-item-card-body-title">Арматура</div>
-                                    <div className="catalog-item-card-body-text">от 14руб/м</div>
-                                    <div className="catalog-item-card-body-btn">{"+"}</div>
-                                    <div className="catalog-item-card-body-img">
-                                        <img src={ArmaturaImg} alt="" style={{width:"170px"}}/>
-                                    </div>
-                                </div>
-
-                                <div className="catalog-item-card-body">
-                                    <div className="catalog-item-card-body-title">Арматура</div>
-                                    <div className="catalog-item-card-body-text">от 14руб/м</div>
-                                    <div className="catalog-item-card-body-btn">{"+"}</div>
-                                    <div className="catalog-item-card-body-img">
-                                        <img src={ArmaturaImg} alt="" style={{width:"170px"}}/>
-                                    </div>
-                                </div>
-
-                                <div className="catalog-item-card-body">
-                                    <div className="catalog-item-card-body-title">Арматура</div>
-                                    <div className="catalog-item-card-body-text">от 14руб/м</div>
-                                    <div className="catalog-item-card-body-btn">{"+"}</div>
-                                    <div className="catalog-item-card-body-img">
-                                        <img src={ArmaturaImg} alt="" style={{width:"170px"}}/>
-                                    </div>
-                                </div>
-                                
                             </div>
+
 
                             <div id="catalogDiv">
                             </div>
@@ -464,7 +580,7 @@ class Layout extends React.Component{
                         </div>
 
                         <div className="footer-right">
-                            <img src={Footer} alt="" style={{width:"100%"}}/>
+                            <img src={Footer} alt="" style={{width:"100%" , height:"100%"}}/>
                             <img src={CarbonBlue} alt="" className="footer-absolute"/>
                         </div>
 

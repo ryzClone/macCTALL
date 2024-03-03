@@ -1,0 +1,172 @@
+.order-none{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.order-none-img-item{
+    width: 300px;
+    height: 300px;
+}
+.order-none-title{
+    font-size: 30px;
+    font-weight: 700;
+}
+.order-none-text{
+    font-size: 22px;
+}
+.order-none-button{
+    margin-top: 10px;
+    padding: 15px 30px;
+    font-size: 22px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--colorWhite);
+    background-color: var(--cursorColor);
+}
+.order-basket{
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+}
+.order-basket-body{
+    display: flex;
+    gap: 20px;
+}
+.basket-body{
+    width: 100%;
+    border: 1px solid var(--boxShadow);
+    padding: 20px;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+}
+.order-basket-title{
+    font-size: 36px;
+    font-weight: 700;
+}
+.order-basket-title span{
+    color: var(--placeholder);
+}
+.basket-body-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0px;
+    border-bottom: 1px solid var(--boxShadow);
+}
+.basket-body-header-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.basket-body-header-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.basket-body-header-title-checkbox{
+    width: 20px;
+    height: 20px;
+}
+.basket-body-header-text-key{
+    color: var(--titleColor);
+    font-size: 20px;
+}
+.basket-body-header-text-element{
+    padding: 5px 7px;
+    border-radius: 2px;
+    color: var(--cursorColor);
+    border: 1px solid var(--cursorColor);
+}
+
+.BasketElementItems{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 0px;
+    border-top: 1px solid var(--boxShadow);
+}
+.BasketElementItems:first-child{
+     border:none;
+}
+.BasketElementItems:last-child{
+    border-bottom: 1px solid var(--boxShadow);
+}
+.basket-body-elements{
+    display: flex;
+    flex-direction: column;
+}
+.basket-body-right{
+    width: 40%;
+    border: 1px solid var(--boxShadow);
+    border-radius: 5px;
+    padding: 20px;
+}
+.basket-body-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 30px;
+}
+.basket-body-right-title{
+    font-size: 36px;
+    font-weight: 700;
+}
+.basket-body-right-product{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.basket-body-right-product-label p{
+    font-size: 20px;
+}
+.basket-body-right-product-title p{
+    font-size: 20px;
+}
+.basket-body-right-product-sum{
+    width: 100%;
+    padding: 15px 0px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--cursorColor);
+    color: var(--colorWhite);
+    cursor: pointer;
+}
+.BasketElementItemsQuanty{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    color: var(--cursorColor);
+    border: 1px solid var(--cursorColor);
+    border-radius: 5px;
+    padding: 0px 15px;
+}
+.cursor{
+    cursor: pointer;
+}
+.BasketElementItemsSummDelete{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.BasketElementItemsSummDeleteImg{
+    width: 16px;
+    height: 16px;
+}
+.BasketElementItemsSummDeleteTitle{
+    font-size: 16px;
+    margin-top: 5px;
+}
+.BasketElementItemsSummAll{
+    font-size: 20px;
+}

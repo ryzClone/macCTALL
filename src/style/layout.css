@@ -13,10 +13,15 @@
     --deleteColor:rgb(245, 38, 38);
     --boxShadow: #c1c1c1;
     --titleColor:#303030;
+    --colorGreen:rgb(42, 215, 42);
+    --modalColor:rgba(0, 0, 0, 0.5);
 }
 .layout-main{
     width: 100%;
     height: 100%;
+}
+#Outleet{
+    padding: 20px 0px;
 }
 .layout-container{
     width: 80%;
@@ -235,7 +240,7 @@
 
 .catalog{
     width: 100%;
-    display: flex;
+    display: none;
     flex-direction: column;
     margin: 0px 0px 20px 0px;
 }
@@ -384,6 +389,93 @@
     top: 0;
     right: 0;
 }
+.catalog-item-card_button-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.catalog-item-card-button{
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--btnColor);
+    color: var(--colorWhite);
+    cursor: pointer;
+}
+/* Modal catalog ############################################## */
+.Catalog-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modalColor);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formModal {
+    background-color: var(--colorWhite); /* Modal ichidagi forma rangi */
+    padding: 30px 50px 30px 40px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+.formModal-item{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.formModal-item label{
+    width: 34%;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.formModal-item input{
+    width: 60%;
+    padding: 7px 0px 7px 10px;
+    border-radius: 5px;
+    border: 1px solid var(--btnColor);
+}
+.formModal-item input:focus{
+    outline: none;
+}
+.formModal-btn-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+.formModal-btn{
+    width: 40%;
+    padding: 7px 0px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--btnColor);
+    color: var(--colorWhite);
+    cursor: pointer;
+}
+.close-modal{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 20px;
+    padding: 2px 8px 3px 8px;
+    border: 1px solid var(--deleteColor);
+    color: var(--deleteColor);
+    cursor: pointer;
+    border-radius: 3px;
+}
+.localstorage-img{
+    max-width: 200px;
+}
 #catalogDiv{
     width: 100%;
     margin: 10px 0px;
@@ -421,8 +513,7 @@
 .footer-left{
     width: 50%;
     background-color: rgba(34, 52, 112, 1);
-    padding-left: 10%;
-    padding-top: 74px;
+    padding: 50px 0px 50px 10%;
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -480,7 +571,7 @@
 .footer-bottom{
     width: 80%;
     margin: auto;
-    padding: 50px 0px;
+    padding: 20px 0px;
 }
 .footer-absolute{
 position: absolute;

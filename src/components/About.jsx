@@ -66,7 +66,21 @@ class About extends React.Component{
             console.error('Xatolik:', error);
         });
     }
-    
+
+    componentDidMount = () => {
+        this.BaseMessage();
+    }
+
+    BaseMessage = () => {
+        const Messages = [
+            {Img:User , Title:`ООО “Строй сити”` , Text:'Каждая партия металлопроката проходит жесткий контроль качества и обязательную сертификацию Каждая партия металлопроката проходит жесткий контроль качества и обязательную сертификацию'},
+            {Img:User , Title:`ООО “Строй сити”` , Text:'Каждая партия металлопроката проходит жесткий контроль качества и обязательную сертификацию Каждая партия металлопроката проходит жесткий контроль качества и обязательную сертификацию'}
+        ]
+        
+        const MessageLocal = JSON.stringify(Messages);
+
+        localStorage.setItem('myMessage' , MessageLocal);
+    }
     
 
     render(){

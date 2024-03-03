@@ -101,6 +101,7 @@
     margin-bottom: 50px;
 }
 .otziv-card{
+    min-width: 100%;
     margin-top: 25px;
     display: flex;
     flex-wrap: wrap;
@@ -116,6 +117,7 @@
     gap: 20px;
     background-color: #EEF1F3;
     padding: 30px;
+    position: relative;
 }
 .otziv-card-item-icon{
     min-width: 57px;

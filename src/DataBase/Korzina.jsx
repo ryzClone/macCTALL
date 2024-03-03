@@ -1,13 +1,26 @@
-export const Items = [
-    {Name:"Арматура" , Price:400 , Quantity:1},
-    {Name:"Арматура" , Price:250 , Quantity:2},
-    {Name:"Арматура" , Price:25.5 , Quantity:3},
-];
+export let Items = JSON.parse(localStorage.getItem('myUsers'));
 
-function  name(Items) {
-    Items = Items.slice(1);
-    console.log(Items);
-    return Items
+export const removeItem = (index) => {
+    if (index === 'full') {
+        localStorage.removeItem('myUsers');
+        Items = [];
+    } else {
+        Items = Items.filter((item, i) => i !== index);
+        localStorage.setItem('myUsers', JSON.stringify(Items));
+    }
 }
-name(Items)
-console.log(Items);
+
+
+export function removeItemById(id) {
+    const index = Items.findIndex(item => item.id === id);
+    if (index !== -1) {
+        Items.splice(index, 1);
+    }
+    localStorage.setItem('myUsers', JSON.stringify(Items));
+    return [...Items]; 
+}
+
+export function updateFirstItem(updatedItem , index) {
+    Items[index].Quantity = updatedItem.Quantity; 
+    localStorage.setItem('myUsers', JSON.stringify(Items));
+}

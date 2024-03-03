@@ -1,0 +1,1 @@
+export const Message = JSON.parse(localStorage.getItem('myMessage'));
